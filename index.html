@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Boolflix - EX BOOLEAN </title>
     <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
+    <link rel="stylesheet" href="C:/Users/Dani/Desktop/web-master/fontawesome-free-5.13.0-web/css/all.css">
     <link rel="stylesheet" href="css/style.css">
   </head>
   <body>
@@ -12,6 +13,8 @@
     <div class="search-div">
       <input type="text" name="search" value="" placeholder="Inserisci il nome di un film">
       <button type="button" name="button">Cerca</button>
+      <!-- <i class="fas fa-star"></i>    PIENA -->
+      <!-- <i class="far fa-star"></i>    VUOTA -->
     </div>
     <div class="lista">
 
@@ -22,13 +25,27 @@
 
     <!-- HANDLEBARS TEMPLATE -->
     <script id="entry-template" type="text/x-handlebars-template">
-      <h2>Scheda Film</h2>
-        <ul>
-          <li>Titolo: {{title}}</li>
-          <li>Titolo originale: {{original}}</li>
-          <li>Lingua: {{language}}</li>
-          <li>Voto: {{rate}}</li>
-        </ul>
+      <div class="movie">
+        <div class="poster">
+
+        </div>
+        <div class="scheda">
+          <h2>Scheda Film</h2>
+          <div class="poster">
+            <img src="https://image.tmdb.org/t/p/w342//{{poster}}" alt="{{alt}}">
+          </div>
+          <ul>
+            <li>Titolo: {{title}}</li>
+            <li>Titolo originale: {{original}}</li>
+            <li>Lingua: {{{language}}}</li>
+            <li>Voto:
+              <span>
+                {{{rate}}}
+              </span>
+            </li>
+            <li>Tipo: {{tipo}}</li>
+          </ul>
+      </div>
     </script>
 
 

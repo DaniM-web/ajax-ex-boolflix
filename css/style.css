@@ -7,3 +7,28 @@
 .search-div{
   text-align: center;
 }
+
+ul{
+  line-height: 30px;
+  margin: 10px;
+}
+
+.lista{
+  display: flex;
+  width: 100%;
+  flex-wrap: wrap;
+}
+.movie {
+  width: calc(100% / 5);
+}
+.scheda ul li img{
+vertical-align: middle;
+}
+
+.poster{
+  width: 150px;
+  height: auto;
+}
+.poster img{
+  width: 100%;
+}
