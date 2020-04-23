@@ -13,7 +13,9 @@ $( document ).ready(function() {
 $('button').click(
   function() {
     $('.lista').empty()
+    //Valore dell'input
     var userInput = $('.search-div input').val();
+    // AJAX per richiesta FILM
     $.ajax({
       url: "https://api.themoviedb.org/3/search/movie",
       method: "GET",
@@ -30,6 +32,7 @@ $('button').click(
         alert("Chiamata fallita!!!");
       }
     });
+    // AJAX per richiesta serie TV
     $.ajax({
       url: "https://api.themoviedb.org/3/search/tv",
       method: "GET",
@@ -48,17 +51,7 @@ $('button').click(
 
   });
 
-function starsGenerator(rating) {
-  var stelle = "";
-  for (var i = 0; i < rating; i++) {
-    stelle += '<i class="fas fa-star"></i>';
-  }
 
-  for (var i = 0; i < 5 - rating; i++) {
-  stelle += '<i class="far fa-star"></i>';
-  }
-  return stelle;
-};
 
 function addElement(list,type) {
 
@@ -77,23 +70,15 @@ function addElement(list,type) {
       tipologia = "TV SHOW";
     }
 
-    var flag;
-    if (elemento.original_language === "it") {
-      flag = "<img src='img/it.png' alt='ita'/>"
-    }else if (elemento.original_language === "en") {
-      flag = "<img src='img/gb.png' alt='eng'/>"
-    }else{
-      flag = elemento.original_language;
-    };
 
-    var votoAssegnato = Math.ceil(elemento.vote_average / 2);
+
+
     var context = {
-      poster: elemento.poster_path,
-      alt: title,
+      poster:posterGenerator(elemento.poster_path),
       title: title,
       original: originalTitle,
-      language: flag,
-      rate: starsGenerator(votoAssegnato),
+      language: flagGenerator(elemento.original_language),
+      rate: starsGenerator(elemento.vote_average),
       tipo: tipologia
     };
 
@@ -103,5 +88,40 @@ function addElement(list,type) {
   };
 };
 
+
+function starsGenerator(rating) {
+  var votoAssegnato = Math.ceil(rating / 2);
+  var stelle = "";
+  for (var i = 0; i < 5; i++) {
+    if (i < votoAssegnato) {
+      stelle += '<i class="fas fa-star"></i>';
+    }else {
+      stelle += '<i class="far fa-star"></i>';
+    }
+  }
+  return stelle;
+};
+
+function flagGenerator(langReturn) {
+  var flags = ["it","en","de","es","pt"];
+  var flagToShow;
+
+  if (flags.includes(langReturn)) {
+    flagToShow = "<img src='img/" + langReturn + ".png' alt='immagine'>";
+    // '<img src="img/' + codiceLang + '.svg" alt="immagine" class="flags" >'
+    return flagToShow
+    }
+    return langReturn;
+}
+
+function posterGenerator(posterCode) {
+  var posterFinal = "<img src='https://image.tmdb.org/t/p/w185";
+  if (posterCode != null) {
+    posterFinal +=  posterCode + "''>'"
+  }else {
+    posterFinal = "img non disponibile"
+  }
+  return posterFinal;
+}
 
 });

@@ -19,16 +19,18 @@ ul{
   flex-wrap: wrap;
 }
 .movie {
-  width: calc(100% / 5);
+  width: calc((100% / 5) - 150px);
+  margin-left: 30px;
 }
 .scheda ul li img{
 vertical-align: middle;
 }
 
-.poster{
+
+/* .poster{
   width: 150px;
   height: auto;
 }
 .poster img{
   width: 100%;
-}
+} */
