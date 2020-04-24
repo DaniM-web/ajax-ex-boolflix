@@ -10,15 +10,24 @@
   </head>
   <body>
 
-    <div class="search-div">
-      <input type="text" name="search" value="" placeholder="Inserisci il nome di un film">
-      <button type="button" name="button">Cerca</button>
-      <!-- <i class="fas fa-star"></i>    PIENA -->
-      <!-- <i class="far fa-star"></i>    VUOTA -->
-    </div>
-    <div class="lista">
+    <header>
+      <div class="logo">
+        <h1>BOOLFLIX</h1>
+      </div>
+      <div class="search-div">
+        <input type="text" name="search" value="" placeholder="Inserisci il nome di un film">
+        <button type="button" name="button">Cerca</button>
+        <!-- <i class="fas fa-star"></i>    PIENA -->
+        <!-- <i class="far fa-star"></i>    VUOTA -->
+      </div>
+    </header>
 
-    </div>
+    <main>
+      <div class="lista">
+
+      </div>
+    </main>
+
 
 
 
@@ -27,7 +36,7 @@
     <script id="entry-template" type="text/x-handlebars-template">
       <div class="movie">
         <div class="scheda">
-          <h2>Scheda Film</h2>
+          <h2>{{tipo}}</h2>
           <div class="poster">
           {{{poster}}}
           </div>
@@ -40,7 +49,6 @@
                 {{{rate}}}
               </span>
             </li>
-            <li><b>Tipo:</b> {{tipo}}</li>
           </ul>
       </div>
     </script>

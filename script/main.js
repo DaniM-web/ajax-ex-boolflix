@@ -9,6 +9,7 @@ $( document ).ready(function() {
 
   var source = $("#entry-template").html();
   var template = Handlebars.compile(source);
+  var apikey = "e4c13d4e03ecaf9b2eff417162a7475e";
 
 $('button').click(
   function() {
@@ -16,39 +17,9 @@ $('button').click(
     //Valore dell'input
     var userInput = $('.search-div input').val();
     // AJAX per richiesta FILM
-    $.ajax({
-      url: "https://api.themoviedb.org/3/search/movie",
-      method: "GET",
-      data: {
-        api_key: "e4c13d4e03ecaf9b2eff417162a7475e",
-        query: userInput
-      },
-      success: function(result,stato) {
-        var risultati = result.results;
-        addElement(risultati,0)
-
-      },
-      error: function(richiesta,stato,errore){
-        alert("Chiamata fallita!!!");
-      }
-    });
+    ajaxCall(0,apikey,userInput,"https://api.themoviedb.org/3/search/movie");
     // AJAX per richiesta serie TV
-    $.ajax({
-      url: "https://api.themoviedb.org/3/search/tv",
-      method: "GET",
-      data: {
-        api_key: "e4c13d4e03ecaf9b2eff417162a7475e",
-        query: userInput
-      },
-      success: function(result,stato) {
-        var risultati = result.results;
-        addElement(risultati,1)
-      },
-      error: function(richiesta,stato,errore){
-        alert("Chiamata fallita!!!");
-      }
-});
-
+    ajaxCall(1,apikey,userInput,"https://api.themoviedb.org/3/search/tv");
   });
 
 
@@ -119,9 +90,31 @@ function posterGenerator(posterCode) {
   if (posterCode != null) {
     posterFinal +=  posterCode + "''>'"
   }else {
-    posterFinal = "img non disponibile"
+    posterFinal = "<img src='img/notimg.jpg' class='notimg'>"
   }
   return posterFinal;
 }
+
+
+function ajaxCall(type,apikey,queryString,url) {
+
+  $.ajax({
+    url: url,
+    method: "GET",
+    data: {
+      api_key: apikey,
+      query: queryString
+    },
+    success: function(result,stato) {
+      var risultati = result.results;
+      addElement(risultati,type)
+
+    },
+    error: function(richiesta,stato,errore){
+      alert("Chiamata fallita!!!");
+    }
+  });
+}
+
 
 });
