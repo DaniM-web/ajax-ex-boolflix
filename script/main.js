@@ -11,6 +11,7 @@ $( document ).ready(function() {
   var template = Handlebars.compile(source);
   var apikey = "e4c13d4e03ecaf9b2eff417162a7475e";
 
+//Ricerca con click
 $('button').click(
   function() {
     $('.lista').empty()
@@ -22,6 +23,20 @@ $('button').click(
     ajaxCall(1,apikey,userInput,"https://api.themoviedb.org/3/search/tv");
   });
 
+// Ricerca con tasto invio
+$('.search-div input').keyup(
+  function (e) {
+    if(e.which == 13) {
+      $('.lista').empty()
+      //Valore dell'input
+      var userInput = $('.search-div input').val();
+      // AJAX per richiesta FILM
+      ajaxCall(0,apikey,userInput,"https://api.themoviedb.org/3/search/movie");
+      // AJAX per richiesta serie TV
+      ajaxCall(1,apikey,userInput,"https://api.themoviedb.org/3/search/tv");
+    }
+  }
+);
 
 
 function addElement(list,type) {
@@ -31,6 +46,7 @@ function addElement(list,type) {
     var title;
     var originalTitle;
     var tipologia;
+
     if (type == 0) {
       title = elemento.title;
       originalTitle = elemento.original_title;
@@ -40,9 +56,7 @@ function addElement(list,type) {
       originalTitle = elemento.original_name;
       tipologia = "TV SHOW";
     }
-
-
-
+    var thisA = $(".attore");
 
     var context = {
       poster:posterGenerator(elemento.poster_path),
@@ -50,7 +64,8 @@ function addElement(list,type) {
       original: originalTitle,
       language: flagGenerator(elemento.original_language),
       rate: starsGenerator(elemento.vote_average),
-      tipo: tipologia
+      tipo: tipologia,
+      attori: castCall(apikey,elemento.id)
     };
 
     var html = template(context);
@@ -88,7 +103,7 @@ function flagGenerator(langReturn) {
 function posterGenerator(posterCode) {
   var posterFinal = "<img src='https://image.tmdb.org/t/p/w185";
   if (posterCode != null) {
-    posterFinal +=  posterCode + "''>'"
+    posterFinal +=  posterCode + "'>"
   }else {
     posterFinal = "<img src='img/notimg.jpg' class='notimg'>"
   }
@@ -112,6 +127,32 @@ function ajaxCall(type,apikey,queryString,url) {
     },
     error: function(richiesta,stato,errore){
       alert("Chiamata fallita!!!");
+    }
+  });
+}
+
+function castCall(apikey,movieid) {
+
+  $.ajax({
+    url: "https://api.themoviedb.org/3/movie/" + movieid + "/credits",
+    method: "GET",
+    data: {
+      api_key: apikey,
+    },
+    success: function(data,stato) {
+      var schedaAttori;
+      var attore;
+      var datas = data.cast;
+      for (var i = 0; i < datas.length; i++) {
+        schedaAttori = datas[i];
+        attore = schedaAttori.name;
+        console.log("Gli attori sono: ",attore);
+        // questo.append(attore);
+
+      }
+    },
+    error: function(richiesta,stato,errore){
+      console.log("non ce un cast");
     }
   });
 }

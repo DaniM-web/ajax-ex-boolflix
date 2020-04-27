@@ -11,14 +11,14 @@
   <body>
 
     <header>
-      <div class="logo">
-        <h1>BOOLFLIX</h1>
-      </div>
-      <div class="search-div">
-        <input type="text" name="search" value="" placeholder="Inserisci il nome di un film">
-        <button type="button" name="button">Cerca</button>
-        <!-- <i class="fas fa-star"></i>    PIENA -->
-        <!-- <i class="far fa-star"></i>    VUOTA -->
+      <div class="header-container">
+        <div class="logo">
+          <h1>BOOLFLIX</h1>
+        </div>
+        <div class="search-div">
+          <input type="text" name="search" value="" placeholder="Inserisci il nome di un film">
+          <button type="button" name="button">Cerca</button>
+        </div>
       </div>
     </header>
 
@@ -40,16 +40,33 @@
           <div class="poster">
           {{{poster}}}
           </div>
-          <ul>
-            <li><b>Titolo:</b> {{title}}</li>
-            <li><b>Titolo originale:</b> {{original}}</li>
-            <li><b>Lingua:</b> {{{language}}}</li>
-            <li></b>Voto:</b>
-              <span>
-                {{{rate}}}
-              </span>
-            </li>
-          </ul>
+          <div class="details">
+            <ul>
+              <li>
+                <b>Titolo:</b> {{title}}
+              </li>
+              <li>
+                <b>Titolo originale:</b> {{original}}
+              </li>
+              <li>
+                <b>Lingua:</b>  {{{language}}}
+              </li>
+              <li>
+                <span>
+                  <b>Cast:</b>
+                </span>
+                <span class="attore">
+                  {{attori}}
+                </span>
+              </li>
+              <li>
+              </b>Voto:</b>
+                <span>
+                  {{{rate}}}
+                </span>
+              </li>
+            </ul>
+          </div>
       </div>
     </script>
 

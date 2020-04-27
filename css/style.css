@@ -15,13 +15,17 @@ ul{
 
 header{
   width: 100%;
-  height: 150px;
+  height: 100px;
   background: #000;
+}
+
+.header-container{
+  width: 98%;
+  height: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
-
 h1{
   font-size: 40px;
   color: red;
@@ -35,7 +39,6 @@ h1{
 }
 .movie {
   width: calc((100% / 6) - 30px);
-
   margin-bottom: 30px;
   border: 1px solid #fff;
   background-color: black;
@@ -43,11 +46,12 @@ h1{
   display: flex;
   justify-content: center;
 }
-.scheda ul li img{
+
+.details ul li img{
 vertical-align: middle;
 
 }
-.scheda ul{
+.details ul{
   list-style-position: inside;
 }
 
@@ -66,7 +70,19 @@ vertical-align: middle;
 
 }
 
-
 .poster img{
-  max-width: 100%;
+  width: 100%;
+  height: 100%;
+}
+.details{
+  width: 100%;
+  height: 100%;
+  background-color: #000;
+  display: none;
+}
+.movie:hover .poster{
+  display: none;
+}
+.movie:hover .details{
+  display: block;
 }
