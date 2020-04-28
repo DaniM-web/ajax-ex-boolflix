@@ -38,7 +38,6 @@ $('.search-div input').keyup(
   }
 );
 
-
 function addElement(list,type) {
 
   for (var i = 0; i < list.length; i++) {
@@ -59,13 +58,13 @@ function addElement(list,type) {
     var thisA = $(".attore");
 
     var context = {
+      movieid : elemento.id,
       poster:posterGenerator(elemento.poster_path),
       title: title,
       original: originalTitle,
       language: flagGenerator(elemento.original_language),
       rate: starsGenerator(elemento.vote_average),
-      tipo: tipologia,
-      attori: castCall(apikey,elemento.id)
+      tipo: tipologia
     };
 
     var html = template(context);
@@ -131,31 +130,42 @@ function ajaxCall(type,apikey,queryString,url) {
   });
 }
 
-function castCall(apikey,movieid) {
+$(".lista").on("mouseenter", ".movie", function() {
+  var movieid = $(this).data("movieid");
+  var elemento = $(this);
 
-  $.ajax({
-    url: "https://api.themoviedb.org/3/movie/" + movieid + "/credits",
-    method: "GET",
-    data: {
-      api_key: apikey,
-    },
-    success: function(data,stato) {
-      var schedaAttori;
-      var attore;
-      var datas = data.cast;
-      for (var i = 0; i < datas.length; i++) {
-        schedaAttori = datas[i];
-        attore = schedaAttori.name;
-        console.log("Gli attori sono: ",attore);
-        // questo.append(attore);
+  var datahover = $(this).data("hovered");
 
+  if ( $(this).data("hovered") != "true") {
+
+    $.ajax({
+      url: "https://api.themoviedb.org/3/movie/" + movieid + "/credits",
+      method: "GET",
+      data: {
+        api_key: apikey,
+      },
+      success: function(data,stato) {
+
+        console.log("dati caricati", data);
+
+        var schedaAttori;
+        var attore;
+        var datas = data.cast;
+        for (var i = 0; i < 5; i++) {
+          schedaAttori = datas[i];
+          attore = schedaAttori.name;
+          console.log("Gli attori del film: ",movieid,attore);
+          $(elemento).find(".attore").append(attore + " ,");
+        }
+
+      },
+      error: function(richiesta,stato,errore){
+        console.log("non ce un cast");
       }
-    },
-    error: function(richiesta,stato,errore){
-      console.log("non ce un cast");
-    }
-  });
-}
+    });
+    $(this).data("hovered","true");
+  }
+});
 
 
 });

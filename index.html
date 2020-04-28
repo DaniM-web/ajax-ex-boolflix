@@ -34,7 +34,7 @@
 
     <!-- HANDLEBARS TEMPLATE -->
     <script id="entry-template" type="text/x-handlebars-template">
-      <div class="movie">
+      <div class="movie" data-movieid="{{movieid}}" >
         <div class="scheda">
           <h2>{{tipo}}</h2>
           <div class="poster">
@@ -49,14 +49,13 @@
                 <b>Titolo originale:</b> {{original}}
               </li>
               <li>
-                <b>Lingua:</b>  {{{language}}}
+                <b>Lingua:</b> {{{language}}}
               </li>
               <li>
                 <span>
                   <b>Cast:</b>
                 </span>
                 <span class="attore">
-                  {{attori}}
                 </span>
               </li>
               <li>

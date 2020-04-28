@@ -38,8 +38,9 @@ h1{
   flex-wrap: wrap;
 }
 .movie {
-  width: calc((100% / 6) - 30px);
-  margin-bottom: 30px;
+  width: calc((100% / 5) - 30px);
+  height: 500px;
+  margin-bottom: 50px;
   border: 1px solid #fff;
   background-color: black;
   color: #fff;
@@ -49,7 +50,6 @@ h1{
 
 .details ul li img{
 vertical-align: middle;
-
 }
 .details ul{
   list-style-position: inside;
@@ -57,16 +57,19 @@ vertical-align: middle;
 
 .scheda h2{
   text-align: center;
+  height: 30px;
+  background-color: #c0c0c0;
 }
 .scheda{
   width: 100%;
+  height: 100%;
 }
 
 
 .poster{
   text-align: center;
   width: 100%;
-  height: 290px;
+  height: calc(100% - 30px);
 
 }
 
@@ -76,7 +79,8 @@ vertical-align: middle;
 }
 .details{
   width: 100%;
-  height: 100%;
+  height: calc(100% - 30px);
+  padding-top: 10px;
   background-color: #000;
   display: none;
 }
